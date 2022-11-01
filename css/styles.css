@@ -25,6 +25,7 @@ input {
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
   font-size: 22px;
+  display: inline-block;
 }
 
 .new-entry-header {
@@ -57,4 +58,45 @@ textarea {
   border-color: transparent;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.new-button {
+  background-color: #562b81;
+  margin-top: 25px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border-color: transparent;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.entries-header {
+  display: inline;
+  color: #f0f0f0;
+  margin-left: 25px;
+  font-family: "Open Sans", sans-serif;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+h2 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bolder;
+  font-size: 14px;
 }

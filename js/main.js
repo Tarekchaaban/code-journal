@@ -24,9 +24,3 @@ function submitHandler(event) {
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
   event.target.reset();
 }
-
-window.addEventListener('beforeunload', unloadHandler);
-function unloadHandler(event) {
-  var dataJSON = JSON.stringify(data);
-  localStorage.setItem('data', dataJSON);
-}

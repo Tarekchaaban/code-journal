@@ -1,0 +1,57 @@
+.purple-background {
+  background-color: #562b81;
+}
+
+.gray-background {
+  background-color: #f0f0f0;
+}
+
+img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  padding-top: 8px;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  font-size: 16px;
+}
+
+.code-journal-header {
+  color: #f0f0f0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: lighter;
+  font-size: 22px;
+}
+
+.new-entry-header {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+}
+
+label {
+  font-weight: bolder;
+  display: block;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+}
+
+.text-align-end {
+  text-align: end;
+}
+
+.submit-button {
+  background-color: #562b81;
+  color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border-color: transparent;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

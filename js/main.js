@@ -70,7 +70,7 @@ function treeHandler(event) {
     $formView.className = 'entry-form hidden';
   } else if (data.view === 'entry-form') {
     $formView.className = 'entry-form';
-    $entriesViewButton.classname = 'entries hidden';
+    $entriesView.className = 'entries hidden';
   }
   for (var i = 0; i < data.entries.length; i++) {
     var newEntry = renderEntry(data.entries[i]);
@@ -85,18 +85,14 @@ var $formView = document.querySelector('div.entry-form');
 $entriesViewButton.addEventListener('click', entriesViewHandler);
 $formViewButton.addEventListener('click', formViewHandler);
 function entriesViewHandler(event) {
-  if (event.target.tagName === 'H3') {
-    $entriesView.className = 'entries';
-    $formView.className = 'entry-form hidden';
-    data.view = 'entries';
+  $entriesView.className = 'entries';
+  $formView.className = 'entry-form hidden';
+  data.view = 'entries';
 
-  }
 }
 
 function formViewHandler(event) {
-  if (event.target.tagName === 'BUTTON') {
-    $formView.className = 'entry-form';
-    $entriesView.className = 'entries hidden';
-    data.view = 'entry-form';
-  }
+  $formView.className = 'entry-form';
+  $entriesView.className = 'entries hidden';
+  data.view = 'entry-form';
 }

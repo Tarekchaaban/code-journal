@@ -22,5 +22,77 @@ function submitHandler(event) {
   data.nextEntryId += 1;
   data.entries.unshift(obj);
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+  var newEntry = renderEntry(obj);
+  $unorderedListRow.prepend(newEntry);
+  $entriesView.className = 'entries';
+  $formView.className = 'entry-form hidden';
   event.target.reset();
+}
+
+function renderEntry(obj) {
+  var $columnFullList = document.createElement('li');
+  $columnFullList.className = 'column-full';
+
+  var $divRow = document.createElement('div');
+  $divRow.className = 'row';
+
+  var $divColumnHalfImage = document.createElement('div');
+  $divColumnHalfImage.className = 'column-half';
+
+  var $image = document.createElement('img');
+  $image.setAttribute('src', obj.photoUrl);
+
+  var $divColumnHalfText = document.createElement('div');
+  $divColumnHalfText.className = 'column-half';
+
+  var $entryTitle = document.createElement('h2');
+  $entryTitle.textContent = obj.title;
+
+  var $entryNotes = document.createElement('p');
+  $entryNotes.textContent = obj.notes;
+
+  $columnFullList.appendChild($divRow);
+  $divRow.appendChild($divColumnHalfImage);
+  $divColumnHalfImage.appendChild($image);
+  $divRow.appendChild($divColumnHalfText);
+  $divColumnHalfText.appendChild($entryTitle);
+  $divColumnHalfText.appendChild($entryNotes);
+
+  return $columnFullList;
+}
+
+var $unorderedListRow = document.querySelector('ul.row');
+window.addEventListener('DOMContentLoaded', treeHandler);
+
+function treeHandler(event) {
+  if (data.view === 'entries') {
+    $entriesView.className = 'entries';
+    $formView.className = 'entry-form hidden';
+  } else if (data.view === 'entry-form') {
+    $formView.className = 'entry-form';
+    $entriesView.className = 'entries hidden';
+  }
+  for (var i = 0; i < data.entries.length; i++) {
+    var newEntry = renderEntry(data.entries[i]);
+    $unorderedListRow.appendChild(newEntry);
+  }
+}
+
+var $entriesViewButton = document.querySelector('h3.entries-header');
+var $formViewButton = document.querySelector('.new-button');
+var $entriesView = document.querySelector('div.entries');
+var $formView = document.querySelector('div.entry-form');
+$entriesViewButton.addEventListener('click', entriesViewHandler);
+$formViewButton.addEventListener('click', formViewHandler);
+function entriesViewHandler(event) {
+  $entriesView.className = 'entries';
+  $formView.className = 'entry-form hidden';
+  data.view = 'entries';
+
+}
+
+function formViewHandler(event) {
+  $formView.className = 'entry-form';
+  $entriesView.className = 'entries hidden';
+  data.view = 'entry-form';
 }

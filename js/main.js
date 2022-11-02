@@ -65,6 +65,13 @@ var $unorderedListRow = document.querySelector('ul.row');
 window.addEventListener('DOMContentLoaded', treeHandler);
 
 function treeHandler(event) {
+  if (data.view === 'entries') {
+    $entriesView.className = 'entries';
+    $formView.className = 'entry-form hidden';
+  } else if (data.view === 'entry-form') {
+    $formView.className = 'entry-form';
+    $entriesViewButton.classname = 'entries hidden';
+  }
   for (var i = 0; i < data.entries.length; i++) {
     var newEntry = renderEntry(data.entries[i]);
     $unorderedListRow.appendChild(newEntry);
@@ -81,6 +88,7 @@ function entriesViewHandler(event) {
   if (event.target.tagName === 'H3') {
     $entriesView.className = 'entries';
     $formView.className = 'entry-form hidden';
+    data.view = 'entries';
 
   }
 }
@@ -88,6 +96,7 @@ function entriesViewHandler(event) {
 function formViewHandler(event) {
   if (event.target.tagName === 'BUTTON') {
     $formView.className = 'entry-form';
-    $entriesViewButton.classname = 'entries hidden';
+    $entriesView.className = 'entries hidden';
+    data.view = 'entry-form';
   }
 }

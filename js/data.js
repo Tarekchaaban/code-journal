@@ -8,7 +8,12 @@ var data = {
 };
 
 window.addEventListener('beforeunload', unloadHandler);
+var previousData = localStorage.getItem('Code Journal Local Storage');
+if (previousData !== null) {
+  data = JSON.parse(previousData);
+}
+
 function unloadHandler(event) {
   var dataJSON = JSON.stringify(data);
-  localStorage.setItem('data', dataJSON);
+  localStorage.setItem('Code Journal Local Storage', dataJSON);
 }

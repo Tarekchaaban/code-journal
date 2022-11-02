@@ -79,7 +79,7 @@ function treeHandler(event) {
 }
 
 var $entriesViewButton = document.querySelector('h3.entries-header');
-var $formViewButton = document.querySelector('button.new-button');
+var $formViewButton = document.querySelector('.new-button');
 var $entriesView = document.querySelector('div.entries');
 var $formView = document.querySelector('div.entry-form');
 $entriesViewButton.addEventListener('click', entriesViewHandler);

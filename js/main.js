@@ -1,6 +1,8 @@
 var $photoUrl = document.querySelector('#photo-url');
 var $entryImage = document.querySelector('.entry-image');
 var $journalEntryForm = document.querySelector('.entry-form');
+var $title = $journalEntryForm.querySelector('#title');
+var $notes = $journalEntryForm.querySelector('#notes');
 $journalEntryForm.addEventListener('submit', submitHandler);
 $photoUrl.addEventListener('input', photoHandler);
 
@@ -10,28 +12,44 @@ function photoHandler(event) {
 
 function submitHandler(event) {
   event.preventDefault();
-  var $title = $journalEntryForm.querySelector('input#title');
-  var $photoUrl = $journalEntryForm.querySelector('input#photo-url');
-  var $notes = $journalEntryForm.querySelector('textarea#notes');
   var obj = {
     title: $title.value,
     photoUrl: $photoUrl.value,
-    notes: $notes.value,
-    Id: data.nextEntryId
+    notes: $notes.value
   };
-  data.nextEntryId += 1;
-  data.entries.unshift(obj);
   $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
-  var newEntry = renderEntry(obj);
-  $unorderedListRow.prepend(newEntry);
   $entriesView.className = 'entries';
   $formView.className = 'entry-form hidden';
+  data.view = 'entries';
   event.target.reset();
+  if (data.editing === null) {
+    obj.Id = data.nextEntryId;
+    data.nextEntryId += 1;
+    data.entries.unshift(obj);
+    var newEntry = renderEntry(obj);
+    $unorderedListRow.prepend(newEntry);
+  } else {
+    obj.Id = data.editing;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].Id === data.editing) {
+        data.entries.splice(i, 1, obj);
+      }
+    }
+    var updatedEntry = renderEntry(obj);
+    var $listItems = document.querySelectorAll('li');
+    for (var j = 0; j < $listItems.length; j++) {
+      var attributeNumberString = $listItems[j].getAttribute('data-entry-id');
+      if (parseInt(attributeNumberString) === obj.Id) {
+        $listItems[j].replaceWith(updatedEntry);
+      }
+    }
+  }
 }
 
 function renderEntry(obj) {
   var $columnFullList = document.createElement('li');
   $columnFullList.className = 'column-full';
+  $columnFullList.setAttribute('data-entry-id', obj.Id);
 
   var $divRow = document.createElement('div');
   $divRow.className = 'row';
@@ -43,10 +61,13 @@ function renderEntry(obj) {
   $image.setAttribute('src', obj.photoUrl);
 
   var $divColumnHalfText = document.createElement('div');
-  $divColumnHalfText.className = 'column-half';
+  $divColumnHalfText.className = 'column-half relative';
 
   var $entryTitle = document.createElement('h2');
   $entryTitle.textContent = obj.title;
+
+  var $editButton = document.createElement('i');
+  $editButton.className = 'fa-solid fa-pen';
 
   var $entryNotes = document.createElement('p');
   $entryNotes.textContent = obj.notes;
@@ -56,6 +77,7 @@ function renderEntry(obj) {
   $divColumnHalfImage.appendChild($image);
   $divRow.appendChild($divColumnHalfText);
   $divColumnHalfText.appendChild($entryTitle);
+  $divColumnHalfText.appendChild($editButton);
   $divColumnHalfText.appendChild($entryNotes);
 
   return $columnFullList;
@@ -95,4 +117,28 @@ function formViewHandler(event) {
   $formView.className = 'entry-form';
   $entriesView.className = 'entries hidden';
   data.view = 'entry-form';
+  data.editing = null;
+  $title.value = null;
+  $photoUrl.value = null;
+  $entryImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $notes.value = null;
+
+}
+
+$unorderedListRow.addEventListener('click', editHandler);
+function editHandler(event) {
+  if (event.target.tagName === 'I') {
+    $formView.className = 'entry-form';
+    $entriesView.className = 'entries hidden';
+    for (var i = 0; i < data.entries.length; i++) {
+      var attributeNumberString = event.target.closest('.column-full').getAttribute('data-entry-id');
+      if (parseInt(attributeNumberString) === data.entries[i].Id) {
+        data.editing = data.entries[i].Id;
+        $title.value = data.entries[i].title;
+        $photoUrl.value = data.entries[i].photoUrl;
+        $entryImage.setAttribute('src', data.entries[i].photoUrl);
+        $notes.value = data.entries[i].notes;
+      }
+    }
+  }
 }

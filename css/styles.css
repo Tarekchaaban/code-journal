@@ -124,3 +124,72 @@ i {
   font-size: 25px;
   cursor: pointer;
 }
+
+a.delete-button {
+  text-decoration: underline;
+  text-decoration-color: red;
+  color: red;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bolder;
+  position: absolute;
+  left: 0;
+  top: 12px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(0 0 0 / 80%);
+  z-index: 1;
+}
+
+.unhidden {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 5px;
+  z-index: 1;
+  height: 125px;
+  width: 375px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.confirm-button {
+  color: white;
+  background-color: #eb5d5d;
+  padding: 5px 15px;
+  border-color: transparent;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0 2px #d4d4d4;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.cancel-button {
+  background-color: #b6b6b6;
+  color: #2a2a2a;
+  padding: 5px 15px;
+  border-color: transparent;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bolder;
+  margin-top: 20px;
+  box-shadow: 0 2px #d4d4d4;
+}
+
+.modal-text-format {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 20px;
+}

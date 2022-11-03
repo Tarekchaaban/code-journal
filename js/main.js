@@ -36,10 +36,9 @@ function submitHandler(event) {
       }
     }
     var updatedEntry = renderEntry(obj);
-    $unorderedListRow.prepend(newEntry);
     var $listItems = document.querySelectorAll('li');
-    var attributeNumberString = $listItems[i].getAttribute('data-entry-id');
     for (var j = 0; j < $listItems.length; j++) {
+      var attributeNumberString = $listItems[j].getAttribute('data-entry-id');
       if (parseInt(attributeNumberString) === obj.Id) {
         $listItems[j].replaceWith(updatedEntry);
       }

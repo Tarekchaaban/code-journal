@@ -16,6 +16,7 @@
 </head>
 
 <body class="gray-background">
+  <div class="overlay hidden"></div>
   <header class="purple-background">
     <div class="container">
       <div class="row">
@@ -51,8 +52,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="column-full text-align-end">
+          <div class="column-full text-align-end relative">
             <button type="submit" class="submit-button">SAVE</button>
+            <a href="#" class="delete-button">Delete Entry</a>
           </div>
         </div>
       </form>
@@ -68,6 +70,25 @@
       </div>
       <ul class="row">
       </ul>
+    </div>
+    <div class="modal hidden">
+      <div class="row">
+        <div class="column-full">
+          <h2 class="modal-text-format">Are you sure you want to delete this entry?</h2>
+        </div>
+      </div>
+      <div class="row jc-center ai-center">
+        <div class="column-full">
+          <div class="row space-between">
+            <div class="column-50">
+              <button class="cancel-button">CANCEL</button>
+            </div>
+            <div class="column-50">
+              <button class="confirm-button">CONFIRM</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <script src="js/data.js"></script>

@@ -48,7 +48,7 @@ function submitHandler(event) {
 
 function renderEntry(obj) {
   var $columnFullList = document.createElement('li');
-  $columnFullList.className = 'column-full';
+  $columnFullList.className = 'column-full new-object';
   $columnFullList.setAttribute('data-entry-id', obj.Id);
 
   var $divRow = document.createElement('div');
@@ -140,5 +140,46 @@ function editHandler(event) {
         $notes.value = data.entries[i].notes;
       }
     }
+  }
+}
+
+var $modalOpenButton = document.querySelector('a.delete-button');
+var $modalCloseButton = document.querySelector('button.cancel-button');
+var $modal = document.querySelector('div.modal');
+var $confirmButton = document.querySelector('button.confirm-button');
+var $overlay = document.querySelector('div.overlay');
+$modalOpenButton.addEventListener('click', showModal);
+$modalCloseButton.addEventListener('click', hideModal);
+$confirmButton.addEventListener('click', deleteHandler);
+
+function showModal(event) {
+  $modal.className = 'modal unhidden';
+  $overlay.className = 'overlay';
+}
+
+function hideModal(event) {
+  $modal.className = 'modal hidden';
+  $overlay.className = 'overlay hidden';
+}
+
+function deleteHandler(event) {
+  if (event.target.tagName === 'BUTTON') {
+    for (var j = 0; j < data.entries.length; j++) {
+      if (data.entries[j].Id === data.editing) {
+        data.entries.splice(j, 1);
+      }
+    }
+    var $listItems = document.querySelectorAll('li');
+    for (var i = 0; i < $listItems.length; i++) {
+      var attributeNumberString = $listItems[i].getAttribute('data-entry-id');
+      if (parseInt(attributeNumberString) === data.editing) {
+        $listItems[i].remove();
+      }
+    }
+    $modal.className = 'modal hidden';
+    $entriesView.className = 'entries';
+    $formView.className = 'entry-form hidden';
+    data.view = 'entries';
+    $overlay.className = 'overlay hidden';
   }
 }
